@@ -23,3 +23,54 @@
         929 = CMXXIX
 
 */
+#include <stdio.h>
+
+void printRoman(int num, char one, char five, char ten) {
+    if (num == 9) {
+        printf("%c%c", one, ten);
+    } else if (num >= 5) {
+        printf("%c", five);
+        for (int i = 6; i <= num; i++) {
+            printf("%c", one);
+        }
+    } else if (num == 4) {
+        printf("%c%c", one, five);
+    } else {
+        for (int i = 1; i <= num; i++) {
+            printf("%c", one);
+        }
+    }
+}
+
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (num <= 0) {
+        printf("Invalid input\n");
+        return 1;
+    }
+
+    printf("%d = ", num);
+
+    int thousands = num / 1000;
+    for (int i = 1; i <= thousands; i++) {
+        printf("M");
+    }
+
+    num = num % 1000;
+    int hundreds = num / 100;
+    printRoman(hundreds, 'C', 'D', 'M');
+
+    num = num % 100;
+    int tens = num / 10;
+    printRoman(tens, 'X', 'L', 'C');
+
+    num = num % 10;
+    printRoman(num, 'I', 'V', 'X');
+
+    printf("\n");
+
+    return 0;
+}
